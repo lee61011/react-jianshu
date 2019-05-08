@@ -3,7 +3,31 @@ import { CSSTransition } from 'react-transition-group'
 import { connect } from 'react-redux'
 import { actionCreators } from './store'
 
-import { HeaderWrapper, Logo, Nav, NavItem, SearchWrapper, NavSearch, Addition, Button } from './style'
+import { HeaderWrapper, Logo, Nav, NavItem, SearchWrapper, NavSearch, SearchInfo, SearchInfoTitle, SearchInfoSwitch, SearchInfoList, SearchInfoItem, Addition, Button } from './style'
+
+/* 搜索框获取焦点时 展示 热门搜索 内容 */
+const getListArea = (show) => {
+    if (show) {
+        return (
+            <SearchInfo>
+                <SearchInfoTitle>
+                    热门搜索
+                            <SearchInfoSwitch>换一批</SearchInfoSwitch>
+                </SearchInfoTitle>
+                <SearchInfoList>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                    <SearchInfoItem>教育</SearchInfoItem>
+                </SearchInfoList>
+            </SearchInfo>
+        )
+    } else {
+        return null;
+    }
+}
 
 const Header = (props) => {
     return (
@@ -28,6 +52,8 @@ const Header = (props) => {
                             onBlur={props.handleInputBlur}></NavSearch>
                     </CSSTransition>
                     <i className={props.focused ? 'focused iconfont' : 'iconfont'}>&#xe60b;</i>
+
+                    { getListArea(props.focused) }
                 </SearchWrapper>
             </Nav>
             <Addition>
@@ -55,9 +81,6 @@ const mapDispathToProps = (dispatch) => {
             dispatch(actionCreators.searchFocus())
         },
         handleInputBlur () {
-            const action = {
-                type: 'search_blur'
-            }
             dispatch(actionCreators.searchBlur())
         }
     }
