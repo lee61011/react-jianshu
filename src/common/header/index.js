@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
+import { CSSTransition } from 'react-transition-group'
 import { HeaderWrapper, Logo, Nav, NavItem, SearchWrapper, NavSearch, Addition, Button } from './style'
 
 class Header extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.state = {
+            focused: false
+        }
+    }
+
     render () {
         return (
             <HeaderWrapper>
@@ -14,8 +24,17 @@ class Header extends Component {
                         <i className="iconfont">&#xe601;</i>
                     </NavItem>
                     <SearchWrapper>
-                        <NavSearch></NavSearch>
-                        <i className="iconfont">&#xe60b;</i>
+                        {/* 搜索框 添加动画效果 */}
+                        <CSSTransition
+                            in={this.state.focused}
+                            timeout={500}
+                            classNames="slide">
+                            <NavSearch
+                            className={this.state.focused ? 'focused' : ''}
+                            onFocus={this.handleInputFocus}
+                            onBlur={this.handleInputBlur}></NavSearch>
+                        </CSSTransition>
+                        <i className={this.state.focused ? 'focused iconfont' : 'iconfont'}>&#xe60b;</i>
                     </SearchWrapper>
                 </Nav>
                 <Addition>
@@ -27,6 +46,17 @@ class Header extends Component {
                 </Addition>
             </HeaderWrapper>
         )
+    }
+
+    handleInputFocus = () => {
+        this.setState({
+            focused: true
+        })
+    }
+    handleInputBlur = () => {
+        this.setState({
+            focused: false
+        })
     }
 }
 
