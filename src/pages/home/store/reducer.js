@@ -32,6 +32,17 @@ const defaultState = fromJS({
             desc: '说一些基础的、适用于初学者的好习惯。 ＃1 - 在开始编码之前先规划和组织代码 在项目的开始阶段，不要上手直接写代码，一定要先确定代码的分层和架...',
             imgUrl: '//upload-images.jianshu.io/upload_images/16557762-b59fc4d5a04a9f37?imageMogr2/auto-orient/strip|imageView2/1/w/360/h/240'
         }
+    ],
+
+    recommendList:[
+        {
+            id: 1,
+            imgUrl: '//cdn2.jianshu.io/assets/web/banner-s-club-aa8bdf19f8cf729a759da42e4a96f366.png'
+        },
+        {
+            id: 2,
+            imgUrl: '//cdn2.jianshu.io/assets/web/banner-s-7-1a0222c91694a1f38e610be4bf9669be.png'
+        }
     ]
 })
 
