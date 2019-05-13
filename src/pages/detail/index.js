@@ -1,23 +1,21 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { DetailWrapper, Header, Content } from './style'
 
 class Detail extends Component {
     render() {
         return (
             <DetailWrapper>
-                <Header>文章标题</Header>
-                <Content>
-                    <img src='https://upload-images.jianshu.io/upload_images/16557762-b59fc4d5a04a9f37?imageMogr2/auto-orient/' alt='' />
-                    <p><b>文章内容文章内容文章内容文章内容文章内容</b></p>
-                    <p>文章内容文章内容文章内容文章内容文章内容</p>
-                    <p>文章内容文章内容文章内容文章内容文章内容</p>
-                    <p>文章内容文章内容文章内容文章内容文章内容</p>
-                    <p>文章内容文章内容文章内容文章内容文章内容</p>
-                    <p>文章内容文章内容文章内容文章内容文章内容</p>
-                </Content>
+                <Header>{ this.props.title }</Header>
+                <Content dangerouslySetInnerHTML={{ __html: this.props.content }} />
             </DetailWrapper>
         )
     }
 }
 
-export default Detail
+const mapState = (state) => ({
+    title: state.getIn(['detail', 'title']),
+    content: state.getIn(['detail', 'content'])
+})
+
+export default connect(mapState, null)(Detail)
