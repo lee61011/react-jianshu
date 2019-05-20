@@ -6,13 +6,13 @@ import { LoginWrapper, LoginBox, Input, Button } from './style'
 
 class Login extends PureComponent {
     render() {
-        const { loginStatus, account, password } = this.props
+        const { loginStatus } = this.props
         if (!loginStatus) {
             return (
                 <LoginWrapper>
                     <LoginBox>
-                        <Input innerRef={ (input) => {this.account = input} } placeholder='账号' />
-                        <Input type='password' innerRef={ (input) => {this.password = input}} placeholder='密码' />
+                        <Input ref ={ (input) => {this.account = input} } placeholder='账号' />
+                        <Input type='password' ref ={ (input) => {this.password = input}} placeholder='密码' />
                         <Button onClick={ () => this.props.login(this.account, this.password) }>登录</Button>
                     </LoginBox>
                 </LoginWrapper>
@@ -28,6 +28,7 @@ const mapState = (state) => ({
 })
 const mapDispatch = (dispatch) => ({
     login(accountElem, passwordElem) {
+        console.log(accountElem.value + '=========' + passwordElem.value )
         dispatch(actionCreators.login(accountElem.value, passwordElem.value))
     }
 })
